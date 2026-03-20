@@ -67,19 +67,18 @@ Explora el plato antes de elegirlo
 </p>
 </div>
 
-<div class="viewer-wrapper">
+<div class="viewer-box">
 
 <model-viewer 
   src="burga.glb"
   ios-src="burga.usdz"
   ar
-  ar-modes="scene-viewer quick-look webxr"
-  camera-controls
-  auto-rotate
-  interaction-prompt="auto"
-  environment-image="neutral"
-  shadow-intensity="1"
-  style="width: 100%; height: 350px;">
+    ar-modes="scene-viewer webxr quick-look"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1"
+    style="width: 100%; height: 300px;"
+  >
   <button slot="ar-button" class="ar-custom-btn">
     📱 Ver en tu espacio
   </button></model-viewer>
