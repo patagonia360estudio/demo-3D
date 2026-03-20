@@ -1155,3 +1155,135 @@ text-align:center;
 grid-template-columns:1fr;
 }
 }
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}/* ============================= */
+/* FIX GLOBAL RESPONSIVE FINAL   */
+/* ============================= */
+
+/* 1. Container bien centrado */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 2. HERO FIX */
+.hero-description {
+  max-width: 600px; /* antes 140px ❌ */
+}
+
+/* 3. TYPO FIX */
+.patagonia-logo {
+  display: flex; /* corregido */
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 4. VIEWER CONTROLS FIX */
+.control-item {
+  align-items: center; /* antes "flex" ❌ */
+  justify-content: center;
+  text-align: center;
+}
+
+/* 5. GRID STEPS (DESKTOP) */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* 6. GRID FEATURES */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ============================= */
+/* 📱 MOBILE FIX REAL */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  /* HERO */
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-description {
+    max-width: 100%;
+  }
+
+  /* BOTONES */
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* VIEWER */
+  .sketchfab-container {
+    border-radius: 20px;
+  }
+
+  /* CONTROLES */
+  .viewer-controls {
+    flex-direction: column;
+  }
+
+  .control-item {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* STEPS 👉 CLAVE */
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* FEATURES 👉 CLAVE */
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ============================= */
+/* 📱 EXTRA MOBILE (iPhone chico) */
+/* ============================= */
+
+@media (max-width: 480px) {
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+}
