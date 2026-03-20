@@ -1405,4 +1405,45 @@ body {
 @keyframes borderMove {
   0% { background-position: 0% }
   100% { background-position: 200% }
+} 
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero h2 {
+  font-size: 18px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  font-size: 16px;
+  max-width: 320px;
+  margin-bottom: 30px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.botones a {
+  text-align: center;
+  padding: 15px;
+  border-radius: 14px;
+  font-size: 16px;
 }
