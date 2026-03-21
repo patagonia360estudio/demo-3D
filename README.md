@@ -1,12 +1,12 @@
-# Digitalización de Piezas Históricas - Demo Interactiva
+# Digitalización de Piezas  - Demo Interactiva
 
 ## 📋 Descripción del Proyecto
 
-Una página web profesional y moderna que demuestra cómo los museos pueden digitalizar objetos históricos y ofrecer experiencias interactivas en 3D a sus visitantes mediante tecnología de escaneo y visualización digital.
+Una página web profesional y moderna que demuestra cómo pueden digitalizar objetos y ofrecer experiencias interactivas en 3D a sus visitantes mediante tecnología de escaneo y visualización digital.
 
 ## 🎯 Objetivo del Proyecto
 
-Crear una experiencia demostrativa que muestre cómo los visitantes de museos pueden explorar objetos históricos en 3D usando sus teléfonos móviles a través de códigos QR, sin necesidad de alterar los objetos originales.
+Crear una experiencia demostrativa que muestre cómo los visitantes pueden explorar objetos en 3D usando sus teléfonos móviles a través de códigos QR, sin necesidad de alterar los objetos originales.
 
 ## 🏛️ Organización
 - **Patagonia 360 – Estudio de Imágenes**
@@ -24,7 +24,7 @@ Crear una experiencia demostrativa que muestre cómo los visitantes de museos pu
 - **Sección de Introducción**: Explicación de la digitalización 3D
 - **Demo Interactiva**: Visor 3D embebido con controles intuitivos
 - **Experiencia del Visitante**: Proceso en 3 pasos simples
-- **Beneficios para Museos**: Puntos clave de valor
+- **Beneficios **: Puntos clave de valor
 - **Mensaje Final**: Filosofía de mejora sin reemplazo
 
 ### 3. **Tecnologías Utilizadas**
