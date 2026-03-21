@@ -1473,9 +1473,9 @@ body {
   background: rgba(255,255,255,0.05);
 }
 .hero-logo {
-  width: 120px;
+  width: 180px; /* antes 120px */
   display: block;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 15px auto;
 }
 
 .logo-container {
@@ -1491,4 +1491,9 @@ body {
   overflow: hidden;
 
   background: rgba(255,255,255,0.05);
+}
+ .brand-sub {
+  display: block;
+  text-align: center;
+  width: 100%;
 }
