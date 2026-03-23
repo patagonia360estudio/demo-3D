@@ -1507,4 +1507,19 @@ body {
   overflow: hidden;
 
   background: rgba(255,255,255,0.05);
+}.section-header {
+  text-align: center;
+  margin-bottom: 40px;
 }
+
+.section-title {
+  font-size: 42px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  margin-top: 10px;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
