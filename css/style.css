@@ -1481,17 +1481,6 @@ body {
 .logo-container {
   text-align: center;
 }
-.viewer-box {
-  width: 90%;
-  max-width: 400px;
-  height: 300px; /* 🔥 IMPORTANTE */
-  margin: 20px auto;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  background: rgba(255,255,255,0.05);
-}
  .brand-sub {
   display: block;
   text-align: center;
@@ -1499,15 +1488,23 @@ body {
 }  
  .viewer-box {
   width: 90%;
-  max-width: 400px;
-  height: 350px; /* 🔥 CLAVE */
-  margin: 20px auto;
+  max-width: 800px;
+  margin: 40px auto;
+
+  aspect-ratio: 16/9; /* 🔥 ESTO SOLUCIONA TODO */
 
   border-radius: 20px;
   overflow: hidden;
 
   background: rgba(255,255,255,0.05);
-}.section-header {
+}
+
+.viewer-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.section-header {
   text-align: center;
   margin-bottom: 40px;
 }
