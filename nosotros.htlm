@@ -1,198 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patagonia 360 | Estudio de Imágenes 3D & AR</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e2e8f0; }
-        
-        /* Estilos Premium: Efecto Cristal y Gradientes */
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .text-gradient { background: linear-gradient(to right, #ffffff, #a1a1a1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .accent-green { color: #4ade80; }
-        
-        /* Estilos específicos para los visores 3D */
-        model-viewer {
-            width: 100%;
-            height: 100%;
-            background-color: transparent;
-            --poster-color: transparent; /* Evita destellos blancos al cargar */
-        }
+<title>Patagonia 360</title>
 
-        /* Botón personalizado de Realidad Aumentada para model-viewer */
-        #ar-button {
-            background-color: white;
-            border-radius: 20px;
-            padding: 8px 16px;
-            color: black;
-            font-weight: 600;
-            font-size: 12px;
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+<style>
+body {
+    background: linear-gradient(180deg, #0b1a2a, #020617);
+    color: white;
+    font-family: system-ui;
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.viewer {
+    width: 100%;
+    max-width: 900px;
+    height: 420px;
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-main {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.btn-outline {
+    border: 1px solid #10b981;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+</style>
 </head>
-<body class="overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 glass py-4 px-6 md:px-8 flex justify-between items-center border-b border-white/5">
-        <div class="text-xl md:text-2xl font-bold tracking-tighter text-white">PATAGONIA <span class="accent-green">360</span></div>
-        <div class="flex items-center space-x-3 md:space-x-8 text-sm font-medium">
-            <a href="#servicios" class="hidden md:block hover:text-green-400 transition">Servicios</a>
-            <a href="#contacto" class="px-4 py-2 bg-white text-black rounded-full hover:bg-green-400 transition text-xs md:text-sm">Solicitar Demo</a>
-        </div>
-    </nav>
+<body>
 
-    <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 pb-16">
-        <div class="absolute inset-0 overflow-hidden -z-10">
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-green-950/30 blur-[120px] rounded-full"></div>
-        </div>
-        
-        <h1 class="text-5xl md:text-7xl font-bold text-gradient mb-6 leading-tight tracking-tight">
-            Interactúa con el<br>mundo en 3D & AR.
-        </h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 font-light">
-            Modelado hiperrealista y Realidad Aumentada para gastronomía, turismo y cultura. Elevamos la percepción de tu marca.
-        </p>
-        
-        <div class="flex flex-col md:flex-row gap-4 mb-16 z-10">
-            <a href="resto.html" class="px-8 py-4 bg-white text-black font-semibold rounded-full hover:scale-105 transition-transform">Ver Demo Gastronómica</a>
-            <a href="#contacto" class="px-8 py-4 glass text-white font-semibold rounded-full border border-white/20 hover:bg-white/10 transition">Contactar Estudio</a>
-        </div>
+<!-- NAV -->
+<div style="position:absolute; top:20px; right:30px;">
+    <a href="index.html">Inicio</a> |
+    <a href="resto.html">Restaurante</a> |
+    <a href="museo.html">Museo</a> |
+    <a href="nosotros/index.html">Nosotros</a>
+</div>
 
-        <div class="relative w-full max-w-6xl aspect-[16/9] md:aspect-[21/9] rounded-2xl glass overflow-hidden border border-white/10 shadow-2xl shadow-green-950/10">
-            
-            <model-viewer 
-                src="burga.glb"
-                ios-src="burga.usdz"
-                alt="Modelo 3D interactivo de Patagonia 360"
-                ar 
-                ar-modes="webxr scene-viewer quick-look" 
-                camera-controls 
-                auto-rotate 
-                interaction-prompt="auto"
-                shadow-intensity="1" 
-                exposure="1">
-                
-                <button slot="ar-button" id="ar-button">
-                    👋 VER EN TU ESPACIO
-                </button>
-                
-                <div slot="poster" class="flex items-center justify-center h-full w-full text-zinc-700 font-mono text-xs">
-                    Cargando Experiencia 3D...
-                </div>
-            </model-viewer>
-        </div>
-    </section>
+<!-- HERO -->
+<div style="text-align:center; padding-top:120px;">
 
-    <section class="py-24 px-8 max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-sm text-gray-500 font-mono tracking-widest uppercase mb-3">El Estudio</h2>
-                <h3 class="text-4xl font-bold mb-6 italic text-gradient">Patagonia 360</h3>
-                <p class="text-gray-400 leading-relaxed text-lg font-light">
-                    Somos un estudio de vanguardia especializado en la creación de activos digitales de alta fidelidad. Fusionamos el arte visual con tecnología AR para romper las barreras entre lo físico y lo digital, creando experiencias inmersivas memorables.
-                </p>
-            </div>
-            <div class="glass p-10 rounded-3xl border-green-900/30 shadow-xl shadow-black/20">
-                <div class="w-12 h-12 bg-green-500/10 rounded-xl mb-6 flex items-center justify-center">
-                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 21h6l-.75-4M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 002-2H3a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Innovación Digital</h3>
-                <p class="text-sm text-gray-500 font-mono tracking-widest uppercase mb-6">3D MODELING • AR • INTERACTIVE VFX</p>
-                <p class="text-gray-400 text-sm">Nuestro enfoque combina precisión técnica con narrativa visual para garantizar que cada interacción sea impactante.</p>
-            </div>
-        </div>
-    </section>
+<h1 style="font-size:48px;">Patagonia 360</h1>
 
-    <section id="servicios" class="py-24 bg-[#080808] border-y border-white/5">
-        <div class="max-w-6xl mx-auto px-8">
-            <h2 class="text-4xl md:text-5xl font-bold mb-20 text-center tracking-tight text-gradient">Nuestra Tecnología</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-10 rounded-3xl hover:border-green-500/30 transition group">
-                    <div class="w-14 h-14 bg-zinc-900 rounded-2xl mb-8 flex items-center justify-center text-green-400 font-bold text-xl border border-white/5 group-hover:bg-green-500/10 transition">01</div>
-                    <h3 class="text-2xl font-bold mb-4">Visualización 3D</h3>
-                    <p class="text-gray-400 font-light">Modelos hiperrealistas de productos con texturas PBR (Physics Based Rendering) para un realismo absoluto en cualquier iluminación.</p>
-                </div>
-                <div class="glass p-10 rounded-3xl hover:border-green-500/30 transition group">
-                    <div class="w-14 h-14 bg-zinc-900 rounded-2xl mb-8 flex items-center justify-center text-green-400 font-bold text-xl border border-white/5 group-hover:bg-green-500/10 transition">02</div>
-                    <h3 class="text-2xl font-bold mb-4">Realidad Aumentada</h3>
-                    <p class="text-gray-400 font-light">Visualiza platos de comida, obras de arte o muebles directamente en tu espacio real utilizando solo la cámara de tu móvil.</p>
-                </div>
-                <div class="glass p-10 rounded-3xl hover:border-green-500/30 transition group">
-                    <div class="w-14 h-14 bg-zinc-900 rounded-2xl mb-8 flex items-center justify-center text-green-400 font-bold text-xl border border-white/5 group-hover:bg-green-500/10 transition">03</div>
-                    <h3 class="text-2xl font-bold mb-4">Experiencias Interactivas</h3>
-                    <p class="text-gray-400 font-light">Desarrollamos interfaces web que permiten al usuario manipular, rotar y explorar cada detalle del objeto digitalmente.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<p style="opacity:0.7;">Estudio de Imágenes</p>
 
-    <section id="demo-gastronomia" class="py-24 px-8 max-w-7xl mx-auto">
-        <h2 class="text-sm text-gray-500 font-mono tracking-widest uppercase mb-3 text-center">Sectores y Demos</h2>
-        <h3 class="text-4xl md:text-5xl font-bold mb-20 text-center tracking-tight italic text-gradient">Aplicaciones Reales</h3>
-        
-        <div class="grid md:grid-cols-3 gap-6">
-            
-            <div class="md:col-span-2 relative group overflow-hidden rounded-3xl aspect-[16/10] glass border border-white/10 shadow-2xl shadow-black/30">
-                <model-viewer 
-                    src="burga.glb"
-                    ios-src="burga.usdz"
-                    alt="Demo Gastronómica 3D"
-                    ar camera-controls auto-rotate shadow-intensity="1.5" exposure="1.2">
-                    <button slot="ar-button" id="ar-button">👋 VER EN TU MESA</button>
-                </model-viewer>
-                
-                <div class="absolute bottom-0 left-0 w-full p-8 z-20 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <h4 class="text-2xl font-bold text-white">Gastronomía 4.0</h4>
-                    <p class="text-sm text-gray-300 font-light max-w-md">Cartas digitales interactivas. Permite a tus clientes ver el plato en su mesa antes de pedir.</p>
-                </div>
-            </div>
+<p style="margin-top:20px;">
+Explora experiencias 3D y realidad aumentada
+</p>
 
-            <div class="relative group overflow-hidden rounded-3xl aspect-square glass border border-white/5 flex items-center justify-center">
-                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                <div class="absolute bottom-8 left-8 z-20">
-                    <h4 class="text-2xl font-bold">Museos</h4>
-                    <p class="text-sm text-gray-300 font-light">Exploración de piezas históricas.</p>
-                </div>
-                <div class="text-zinc-800 font-mono text-xs">[ Imagen Museos ]</div>
-            </div>
+<div style="margin-top:40px;">
+    <a href="resto.html" class="btn btn-main">🍔 Ver Restaurante</a>
+    <a href="museo.html" class="btn btn-outline">🏛 Ver Museo</a>
+</div>
 
-            <div class="relative group overflow-hidden rounded-3xl aspect-square glass border border-white/5 flex items-center justify-center">
-                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                <div class="absolute bottom-8 left-8 z-20">
-                    <h4 class="text-2xl font-bold">Turismo</h4>
-                    <p class="text-sm text-gray-300 font-light">Recorridos inmersivos 360.</p>
-                </div>
-                <div class="text-zinc-800 font-mono text-xs">[ Imagen Turismo ]</div>
-            </div>
-        </div>
-    </section>
+</div>
 
-    <section class="py-24 glass border-y border-white/5 my-16">
-        <div class="max-w-5xl mx-auto px-8 grid md:grid-cols-3 gap-12 text-center">
-            <div>
-                <div class="text-5xl font-extrabold text-green-400 mb-2 tracking-tighter">+40%</div>
-                <p class="text-sm uppercase tracking-widest text-gray-500 font-medium">Tasa de Conversión</p>
-            </div>
-            <div>
-                <div class="text-5xl font-extrabold text-white mb-2 tracking-tighter">100%</div>
-                <p class="text-sm uppercase tracking-widest text-gray-500 font-medium">Innovación de Marca</p>
-            </div>
-            <div>
-                <div class="text-5xl font-extrabold text-green-400 mb-2 tracking-tighter">Top</div>
-                <p class="text-sm uppercase tracking-widest text-gray-500 font-medium">Diferenciación</p>
-            </div>
-        </div>
-    </section>
+<!-- VISOR -->
+<div style="margin-top:60px;">
+    <div class="viewer">
+        <model-viewer 
+            src="burga.glb"
+            ios-src="burga.usdz"
+            ar
+            camera-controls
+            auto-rotate>
+        </model-viewer>
+    </div>
+</div>
+
+<!-- LINKS ENTRE EXPERIENCIAS -->
+<div style="text-align:center; margin-top:60px;">
+
+<p>También podés explorar:</p>
+
+<div style="margin-top:20px;">
+    <a href="resto.html">🍔 Restaurante</a> |
+    <a href="museo.html">🏛 Museo</a> |
+    <a href="nosotros/index.html">🔍 Nosotros</a>
+</div>
+
+</div>
+
+</body>
+</html>
