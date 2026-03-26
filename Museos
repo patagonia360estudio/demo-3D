@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patagonia 360 | Museo 3D</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed; top:20px; right:20px; z-index:1000;">
+<a href="index.html" style="color:#00c2a8;">Restaurante</a>
+<a href="museo.html" style="color:white;">Museo</a>
+</nav>
+
+<section class="hero">
+
+<h1 class="hero-title">Explorá la historia en 3D</h1>
+
+<p class="hero-subtitle">
+Interactuá con piezas culturales en detalle
+</p>
+
+</section>
