@@ -1604,3 +1604,27 @@ nav a.active {
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
+/* ============================= */
+/* FIX CENTRADO BRAND */
+/* ============================= */
+
+.logo-container {
+  text-align: center;
+}
+
+.brand-title {
+  text-align: center;
+}
+
+.brand-sub {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+/* asegura centrado real del bloque */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
