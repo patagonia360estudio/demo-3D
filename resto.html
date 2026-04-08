@@ -9,14 +9,16 @@
 <link rel="stylesheet" href="css/style.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 
 <body>
 
 <!-- NAV -->
 <nav style="position:fixed; top:20px; right:20px; z-index:1000;">
-<a href="index.html" style="color:white; margin-right:15px;">Museo</a>
+<a href="museo.html" style="color:white; margin-right:15px;">Museo</a>
 <a href="resto.html" style="color:#00c2a8;">Restaurante</a>
+<a href="nosotros.html" style="color:white;">Nosotros</a>
 </nav>
 
 <!-- HERO -->
@@ -38,13 +40,8 @@ Visualiza platos en 3D antes de pedir y mejora la experiencia del cliente
 </p>
 
 <div class="hero-buttons">
-<a href="#modelo3d" class="cta-primary">
-Ver plato en 3D <i class="fas fa-utensils"></i>
-</a>
-
-<a href="#como-funciona" class="cta-secondary">
-Cómo funciona <i class="fas fa-play"></i>
-</a>
+<a href="#modelo3d" class="cta-primary">Ver plato en 3D 🍽</a>
+<a href="#como-funciona" class="cta-secondary">Cómo funciona ▶</a>
 </div>
 
 </div>
@@ -56,17 +53,15 @@ Cómo funciona <i class="fas fa-play"></i>
 
 <div class="section-header">
 <h2 class="section-title">Experiencia gastronómica en 3D</h2>
-<p class="section-subtitle">
-Explora el plato antes de elegirlo
-</p>
+<p class="section-subtitle">Explora el plato antes de elegirlo</p>
 </div>
 
-<!-- VISOR 1 -->
+<!-- PLATO 1 -->
 <div class="viewer-box">
 
 <iframe 
 title="burger-3d"
-style="width: 100%; height: 350px; border-radius: 20px;"
+style="width:100%; height:350px; border-radius:20px;"
 frameborder="0"
 allowfullscreen
 allow="autoplay; fullscreen; xr-spatial-tracking"
@@ -81,12 +76,12 @@ src="https://sketchfab.com/models/34e907e32afc43cdbdea0ba3119310e3/embed">
 
 </div>
 
-<!-- VISOR 2 -->
+<!-- PLATO 2 -->
 <div class="viewer-box">
 
 <iframe 
-title="plato-2"
-style="width: 100%; height: 350px; border-radius: 20px;"
+title="Plato 2"
+style="width:100%; height:350px; border-radius:20px;"
 frameborder="0"
 allowfullscreen
 allow="autoplay; fullscreen; xr-spatial-tracking"
@@ -108,34 +103,30 @@ src="https://sketchfab.com/models/1e2237f5c87542a4a50629e3edb92f2a/embed">
 <section id="como-funciona" class="how-it-works">
 <div class="container">
 
-<div class="section-header">
-<h2 style="text-align:center; margin-top:60px;">Cómo funciona</h2>
-<p style="text-align:center; opacity:0.7;">
-Tres pasos simples para mejorar la experiencia
-</p>
-</div>
+<h2 class="section-title">Cómo funciona</h2>
+<p class="section-subtitle">Tres pasos simples para mejorar la experiencia</p>
 
 <div class="steps-grid">
 
 <div class="step-card">
 <div class="step-number">01</div>
-<div class="step-icon"><i class="fas fa-qrcode"></i></div>
-<h3>Escanea el QR</h3>
-<p>Accede al menú digital desde tu celular.</p>
+<i class="fas fa-qrcode"></i>
+<h3>Escaneá el QR</h3>
+<p>Accedé al menú digital desde tu celular.</p>
 </div>
 
 <div class="step-card">
 <div class="step-number">02</div>
-<div class="step-icon"><i class="fas fa-cube"></i></div>
-<h3>Explora en 3D</h3>
-<p>Visualiza el plato antes de pedir.</p>
+<i class="fas fa-cube"></i>
+<h3>Explorá en 3D</h3>
+<p>Visualizá el plato antes de pedir.</p>
 </div>
 
 <div class="step-card">
 <div class="step-number">03</div>
-<div class="step-icon"><i class="fas fa-utensils"></i></div>
+<i class="fas fa-utensils"></i>
 <h3>Elegí con confianza</h3>
-<p>Tomá mejores decisiones y mejora la experiencia.</p>
+<p>Tomá mejores decisiones.</p>
 </div>
 
 </div>
@@ -147,30 +138,41 @@ Tres pasos simples para mejorar la experiencia
 <section class="features">
 <div class="container">
 
-<div class="section-header fade-in">
-<h3 class="step-title">Elegí con confianza</h3>
-<p class="step-description">
-Mejor experiencia, mayor seguridad y satisfacción del cliente.
-</p>
-</div>
+<h2 class="section-title">Beneficios</h2>
 
 <div class="features-grid">
 
-<div class="feature-card"><h3>Mayor conversión</h3><p>Más seguridad al elegir.</p></div>
-<div class="feature-card"><h3>Experiencia innovadora</h3><p>Tecnología interactiva.</p></div>
-<div class="feature-card"><h3>Menú digital</h3><p>Sin impresión.</p></div>
-<div class="feature-card"><h3>Impacto visual</h3><p>Mayor engagement.</p></div>
+<div class="feature-card">
+<h3>Mayor conversión</h3>
+<p>Más seguridad al elegir.</p>
+</div>
+
+<div class="feature-card">
+<h3>Experiencia innovadora</h3>
+<p>Tecnología interactiva.</p>
+</div>
+
+<div class="feature-card">
+<h3>Menú digital</h3>
+<p>Sin impresión.</p>
+</div>
+
+<div class="feature-card">
+<h3>Impacto visual</h3>
+<p>Mayor engagement.</p>
+</div>
 
 </div>
 
 </div>
 </section>
 
-<!-- EXTRA LINKS -->
-<section style="text-align:center; margin-top:60px;">
+<!-- CROSS LINKS -->
+<section style="text-align:center; margin:60px 0;">
 <p>Esta tecnología también se aplica a museos y turismo</p>
-<a href="museo.html">Ver experiencia museo</a><br><br>
-<a href="nosotros.html">Quiénes somos</a>
+
+<a href="museo.html" class="cta-secondary">🏛 Ver experiencia museo</a><br><br>
+<a href="nosotros.html" class="cta-secondary">🔍 Quiénes somos</a>
 </section>
 
 <!-- FOOTER -->
@@ -179,14 +181,11 @@ Mejor experiencia, mayor seguridad y satisfacción del cliente.
 
 <img src="img/logoMed.png" style="width:70px; margin-bottom:15px;">
 
-<p class="footer-text">Patagonia 360 – Experiencias digitales</p>
-<p>Tecnología aplicada a gastronomía</p>
-<p>© 2026 Patagonia 360 | Bariloche</p>
+<p>Patagonia 360 – Experiencias digitales</p>
+<p>Bariloche – Argentina</p>
 
 </div>
 </footer>
-
-<script src="main.js"></script>
 
 </body>
 </html>
