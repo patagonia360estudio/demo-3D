@@ -297,4 +297,116 @@ nav a.active {
 
 /* títulos principales */
 h2, .section-title {
-  color: var(--patagonia
+  color: var(--patagonia)
+             /* ============================= */
+/* CARDS INTERACTIVAS PRO */
+/* ============================= */
+
+.step-card,
+.feature-card {
+  position: relative;
+  transition: all 0.35s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* hover base */
+.step-card:hover,
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(15,118,110,0.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+/* BORDE ANIMADO (🔥 esto levanta todo) */
+.step-card::before,
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, transparent, var(--patagonia-teal), var(--patagonia-gold), transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.step-card:hover::before,
+.feature-card:hover::before {
+  opacity: 1;
+} 
+  .step-icon,
+.feature-icon {
+  transition: all 0.3s ease;
+}
+
+.step-card:hover .step-icon,
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* título */
+.step-card h3,
+.feature-card h3 {
+  transition: all 0.3s ease;
+}
+
+.step-card:hover h3,
+.feature-card:hover h3 {
+  color: var(--patagonia-gold);
+}
+  /* ============================= */
+/* BOTONES ULTRA PRO */
+/* ============================= */
+
+.cta-primary,
+.cta-secondary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* efecto presión */
+.cta-primary:active,
+.cta-secondary:active {
+  transform: scale(0.97);
+}
+
+/* glow dinámico */
+.cta-primary:hover {
+  box-shadow: 0 15px 40px rgba(15,118,110,0.5);
+}
+
+.cta-secondary:hover {
+  box-shadow: 0 15px 40px rgba(194,163,107,0.5);
+}
+
+/* línea animada inferior */
+.cta-primary::before,
+.cta-secondary::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--patagonia-teal), var(--patagonia-gold));
+  transition: width 0.4s ease;
+}
+
+.cta-primary:hover::before,
+.cta-secondary:hover::before {
+  width: 100%;
+}
+  .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
