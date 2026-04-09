@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<!-- Model Viewer -->
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 </head>
@@ -17,101 +18,139 @@
 
 <!-- NAV -->
 <nav style="position:fixed; top:20px; right:20px; z-index:1000;">
-<a href="index.html" style="color:white; margin-right:15px;">Inicio</a>
-<a href="resto.html" style="color:white; margin-right:15px;">Restaurante</a>
-<a href="museo.html" style="color:white; margin-right:15px;">Museo</a>
-<a href="nosotros.html" style="color:#00c2a8;">Nosotros</a>
+  <a href="index.html" style="color:white; margin-right:15px;">Inicio</a>
+  <a href="resto.html" style="color:white; margin-right:15px;">Restaurante</a>
+  <a href="museo.html" style="color:white; margin-right:15px;">Museo</a>
+  <a href="nosotros.html" style="color:#00c2a8;">Nosotros</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-<div class="hero-content reveal">
+  <div class="hero-content reveal">
 
-<img src="img/LogoV2.png" class="hero-logo">
+    <img src="img/LogoV2.png" class="hero-logo">
 
-<h1 class="brand-title">Patagonia 360</h1>
-<p class="brand-sub">Estudio de Imágenes</p>
+    <h1 class="brand-title">Patagonia 360</h1>
+    <p class="brand-sub">Estudio de Imágenes</p>
 
-<h2 class="hero-title">
-Experiencias digitales que transforman la forma de explorar
-</h2>
+    <h2 class="hero-title">
+      Experiencias digitales que transforman la forma de explorar
+    </h2>
 
-<p class="hero-subtitle">
-Creamos soluciones en 3D, realidad aumentada y visualización interactiva.
-</p>
+    <p class="hero-subtitle">
+      Creamos soluciones en 3D, realidad aumentada y visualización interactiva para turismo, gastronomía y patrimonio.
+    </p>
 
-<div class="hero-buttons">
-<a href="resto.html" class="cta-primary">🍔 Restaurante</a>
-<a href="museo.html" class="cta-secondary">🏛 Museo</a>
-</div>
+    <div class="hero-buttons">
+      <a href="resto.html" class="cta-primary">🍔 Restaurante</a>
+      <a href="museo.html" class="cta-secondary">🏛 Museo</a>
+    </div>
 
-</div>
+  </div>
 </section>
 
-<!-- VISOR -->
+<!-- VISOR 3D -->
 <section class="main-viewer">
-<div class="container reveal">
+  <div class="container reveal">
 
-<h2 class="section-title">Explorá nuestra tecnología</h2>
+    <h2 class="section-title">Explorá nuestra tecnología</h2>
 
-<model-viewer 
-src="burga.glb"
-ios-src="burga.usdz"
-ar
-camera-controls
-auto-rotate
-style="width:100%; height:400px;"
->
+    <model-viewer 
+      src="burga.glb"
+      ios-src="burga.usdz"
+      ar
+      ar-modes="scene-viewer quick-look webxr"
+      camera-controls
+      auto-rotate
+      interaction-prompt="auto"
+      style="width:100%; height:400px; border-radius:20px;"
+    >
+      <button slot="ar-button" class="ar-btn">
+        📱 Ver en tu espacio
+      </button>
+    </model-viewer>
 
-<button slot="ar-button" class="ar-btn">
-📱 Ver en tu espacio
-</button>
-
-</model-viewer>
-
-</div>
+  </div>
 </section>
-  <!-- CASO REAL -->
+
+<!-- CASO REAL MEGALODON -->
 <section class="main-viewer">
-<div class="container">
+  <div class="container reveal">
 
-<h2 class="section-title">Caso real – Megalodon en AR</h2>
-<p class="section-subtitle">Museo en Comallo, Río Negro</p>
+    <h2 class="section-title">Caso real – Megalodon en AR</h2>
+    <p class="section-subtitle">Museo en Comallo, Río Negro</p>
 
-<div class="video-grid">
+    <div class="video-grid">
 
-<video autoplay muted loop playsinline controls>
-  <source src="video/meg1.mp4" type="video/mp4">
-</video>
+      <video autoplay muted loop playsinline controls class="video-card">
+        <source src="meg1.mp4" type="video/mp4">
+      </video>
 
-<video autoplay muted loop playsinline controls>
-  <source src="video/meg2.mp4" type="video/mp4">
-</video>
- 
-<video autoplay muted loop playsinline controls>
-  <source src="video/meg3.mp4" type="video/mp4">
-</video>
+      <video autoplay muted loop playsinline controls class="video-card">
+        <source src="meg2.mp4" type="video/mp4">
+      </video>
 
-</div>
+      <video autoplay muted loop playsinline controls class="video-card">
+        <source src="meg3.mp4" type="video/mp4">
+      </video>
 
-<p style="text-align:center; margin-top:20px; opacity:0.7;">
-Experiencia desarrollada junto a institución asociada en Río Negro
-</p>
+    </div>
 
-</div>
+    <p style="text-align:center; margin-top:25px; opacity:0.7;">
+      Experiencia desarrollada junto a institución asociada en Río Negro
+    </p>
+
+  </div>
+</section>
+
+<!-- CTA CRUZADO -->
+<section style="text-align:center; margin:80px 0;">
+
+  <p style="margin-bottom:20px; font-size:18px;">
+    También podés explorar nuestras experiencias:
+  </p>
+
+  <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+
+    <a href="resto.html" class="cta-primary">🍔 Restaurante</a>
+    <a href="museo.html" class="cta-secondary">🏛 Museo</a>
+
+  </div>
+
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-<div class="container">
+  <div class="container" style="text-align:center;">
 
-<img src="img/logoMed.png" style="width:70px;">
-<p>Patagonia 360 – Estudio de Imágenes</p>
+    <img src="img/logoMed.png" style="width:70px; margin-bottom:15px;">
 
-</div>
+    <p class="footer-text">
+      Patagonia 360 – Estudio de Imágenes
+    </p>
+
+    <p style="opacity:0.6;">
+      Bariloche | Experiencias 3D y realidad aumentada
+    </p>
+
+  </div>
 </footer>
 
-<script src="main.js"></script>
+<!-- ANIMACIONES -->
+<script>
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", () => {
+  reveals.forEach(el => {
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+});
+</script>
 
 </body>
 </html>
