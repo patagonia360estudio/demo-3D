@@ -5,171 +5,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Patagonia 360 | Experiencia Museo 3D</title>
+<title>Patagonia 360 | Experiencia Museo</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
 
 <body>
 
 <!-- NAV -->
-<nav style="position:fixed; top:20px; right:20px; z-index:1000;">
-<a href="museo.html" style="color:#00c2a8; margin-right:15px;">Museo</a>
-<a href="resto.html" style="color:white; margin-right:15px;">Restaurante</a>
-<a href="nosotros.html" style="color:white;">Nosotros</a>
+<nav style="position:fixed; top:20px; right:20px;">
+<a href="museo.html" style="color:#00c2a8;">Museo</a>
+<a href="resto.html">Restaurante</a>
+<a href="nosotros.html">Nosotros</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-<div class="hero-content">
+<div class="hero-content reveal">
 
-<img src="img/LogoV2.png" class="hero-logo">
-
-<h1 class="brand-title">Patagonia 360</h1>
-<p class="brand-sub">Estudio de Imágenes</p>
-
-<h2 class="hero-title">Digitalización del patrimonio histórico</h2>
+<h1 class="brand-title">Museos interactivos</h1>
 
 <p class="hero-subtitle">
-Explora piezas reales escaneadas en 3D sin manipular los objetos originales
+Digitalización y realidad aumentada aplicada al patrimonio
 </p>
-
-<div class="hero-buttons">
-<a href="#modelo3d" class="cta-primary">Explorar modelo</a>
-<a href="#como-funciona" class="cta-secondary">Cómo funciona</a>
-</div>
 
 </div>
 </section>
 
 <!-- VISOR -->
-<section id="modelo3d" class="main-viewer">
-<div class="container">
+<section class="main-viewer">
+<div class="container reveal">
 
-<h2 class="section-title">Experiencia inmersiva</h2>
+<h2 class="section-title">Exploración 3D</h2>
 
-<div class="viewer-box">
-
-<iframe
-title="pieza museo"
+<iframe 
 style="width:100%; height:350px; border-radius:20px;"
-frameborder="0"
-allowfullscreen
-allow="autoplay; fullscreen; xr-spatial-tracking"
 src="https://sketchfab.com/models/6cfeaf1f7aaa424ba9507d207fe21339/embed">
 </iframe>
 
 </div>
+</section>
 
-<!-- AR -->
-<div style="margin-top:30px;">
+<!-- CASO MEGALODON -->
+<section class="main-viewer">
+<div class="container reveal">
 
-<model-viewer 
-src="diente.glb"
-ios-src="diente.usdz"
-ar
-camera-controls
-auto-rotate
-style="width:100%; height:350px;"
->
+<h2 class="section-title">Caso real – Megalodon</h2>
 
-<button slot="ar-button" class="ar-btn">
-📱 Ver en tu espacio
-</button>
+<div class="video-grid">
 
-</model-viewer>
+<video autoplay muted loop playsinline controls>
+<source src="meg1.mp4" type="video/mp4">
+</video>
+
+<video autoplay muted loop playsinline controls>
+<source src="meg2.mp4" type="video/mp4">
+</video>
+
+<video autoplay muted loop playsinline controls>
+<source src="meg3.mp4" type="video/mp4">
+</video>
 
 </div>
+
+<p style="margin-top:20px; opacity:0.7;">
+Aplicación real en museo: visualización sin manipulación de piezas originales
+</p>
 
 </div>
 </section>
 
-<!-- COMO FUNCIONA -->
-<section id="como-funciona" class="how-it-works">
-<div class="container">
+<!-- PROPUESTA -->
+<section style="text-align:center; margin:80px 0;">
+<h2 class="section-title">Transformá tu museo</h2>
 
-<h2 class="section-title">Cómo funciona</h2>
+<p style="max-width:600px; margin:auto; opacity:0.7;">
+Implementamos experiencias interactivas que aumentan el tiempo de visita y el engagement del público.
+</p>
 
-<div class="steps-grid">
+<br>
 
-<div class="step-card">
-<div class="step-number">01</div>
-<h3>Descubrimiento</h3>
-<p>Observa la pieza y accede a su versión digital.</p>
-</div>
-
-<div class="step-card">
-<div class="step-number">02</div>
-<h3>Acceso</h3>
-<p>Escanea un QR o accede desde pantalla.</p>
-</div>
-
-<div class="step-card">
-<div class="step-number">03</div>
-<h3>Exploración</h3>
-<p>Interactúa sin tocar la pieza original.</p>
-</div>
-
-</div>
-
-</div>
+<a href="https://wa.me/5492944931548" class="cta-primary">
+📲 Contactanos
+</a>
 </section>
-
-<!-- BENEFICIOS -->
-<section class="features">
-<div class="container">
-
-<h2 class="section-title">Ventajas</h2>
-
-<div class="features-grid">
-
-<div class="feature-card">
-<h3>Experiencia inmersiva</h3>
-</div>
-
-<div class="feature-card">
-<h3>Educación interactiva</h3>
-</div>
-
-<div class="feature-card">
-<h3>Exploración digital</h3>
-</div>
-
-<div class="feature-card">
-<h3>Preservación</h3>
-</div>
-
-</div>
-
-</div>
-</section>
-
-<!-- LINKS -->
-<section style="text-align:center; margin:60px 0;">
-<p>También aplicable a gastronomía</p>
-
-  <div class="cross-links">
-
-<a href="resto.html" class="cta-primary">🍔 Ver restaurante</a>
-    
-<a href="nosotros.html" class="cta-secondary">🔍 Sobre Patagonia 360</a>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-<div class="container">
-
-<img src="img/logoMed.png" style="width:70px; margin-bottom:15px;">
-<p>Patagonia 360 – Estudio de Imágenes</p>
-
-</div>
-</footer>
 
 </body>
 </html>
