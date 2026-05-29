@@ -8,7 +8,7 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     /* ══════════════════════════════════════
-       RESET & VARIABLES COMPARTIDAS
+       RESET & VARIABLES
     ══════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -41,7 +41,7 @@
     ::-webkit-scrollbar-thumb { background:var(--gold); }
 
     /* ══════════════════════════════════════
-       NAV UNIFICADA
+       NAV
     ══════════════════════════════════════ */
     nav { position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:18px 5%; background:rgba(2,6,23,.78); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid rgba(212,175,55,.07); z-index:1000; transition:padding .4s var(--ease); }
     nav.scrolled { padding:11px 5%; }
@@ -120,26 +120,154 @@
     .gold-line { position:absolute; top:0; left:10%; right:10%; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); opacity:.18; }
 
     /* ══════════════════════════════════════
-       MODELO 3D / AR
+       MENÚ DIGITAL — SELECTOR DE PLATOS
     ══════════════════════════════════════ */
-    #modelo { background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(180,90,14,.1) 0%, transparent 70%), var(--bg-mid); }
-    .modelo-layout { max-width:1160px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
-    .viewer-wrap { position:relative; border-radius:22px; overflow:hidden; border:1px solid var(--border); box-shadow:0 40px 100px rgba(0,0,0,.6), 0 0 60px rgba(212,175,55,.06); transition:box-shadow .5s; background:linear-gradient(135deg,rgba(11,26,42,.95),rgba(2,6,23,.95)); }
+    #menu-digital {
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,.07) 0%, transparent 60%),
+                  radial-gradient(ellipse 60% 50% at 50% 100%, rgba(16,185,129,.05) 0%, transparent 60%),
+                  var(--bg-mid);
+      padding-top: 100px;
+    }
+
+    /* Encabezado del menú */
+    .menu-header { text-align:center; margin-bottom:48px; }
+    .menu-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--gold-dim); border:1px solid var(--border);
+      border-radius:30px; padding:6px 18px;
+      font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:20px;
+    }
+    .menu-badge-dot { width:6px;height:6px;border-radius:50%;background:var(--green);animation:badgePulse 2s ease-in-out infinite; }
+
+    /* Tabs de selección */
+    .plato-tabs {
+      display:flex; gap:12px; justify-content:center;
+      flex-wrap:wrap; margin-bottom:40px;
+    }
+    .plato-tab {
+      position:relative; display:flex; flex-direction:column; align-items:center; gap:8px;
+      padding:18px 28px 16px;
+      border-radius:18px; border:1px solid var(--border);
+      background:var(--bg-card);
+      cursor:none; transition:all .4s var(--ease);
+      min-width:170px; text-align:center;
+    }
+    .plato-tab:hover { border-color:rgba(212,175,55,.35); transform:translateY(-4px); box-shadow:0 16px 44px rgba(0,0,0,.4); }
+    .plato-tab.active {
+      border-color:var(--gold);
+      background:linear-gradient(135deg, rgba(212,175,55,.14), rgba(212,175,55,.06));
+      box-shadow:0 0 0 1px var(--gold), 0 20px 50px rgba(212,175,55,.18);
+      transform:translateY(-6px);
+    }
+    .plato-tab-num {
+      font-size:9px; letter-spacing:.22em; text-transform:uppercase;
+      color:var(--muted); font-family:'Syne',sans-serif;
+    }
+    .plato-tab.active .plato-tab-num { color:var(--gold); }
+    .plato-tab-emoji { font-size:1.9rem; line-height:1; }
+    .plato-tab-name {
+      font-family:'Syne',sans-serif; font-weight:700; font-size:.82rem;
+      letter-spacing:.04em; color:var(--white); line-height:1.2;
+    }
+    .plato-tab.active .plato-tab-name { color:var(--gold-pale); }
+    .plato-tab-pill {
+      font-size:10px; padding:3px 10px; border-radius:20px;
+      background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.22);
+      color:var(--green); letter-spacing:.05em;
+    }
+    .plato-tab.active .plato-tab-pill {
+      background:rgba(212,175,55,.15); border-color:rgba(212,175,55,.3); color:var(--gold-pale);
+    }
+    /* Indicador activo */
+    .plato-tab::after {
+      content:'';position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+      width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;
+      border-top:8px solid var(--gold); opacity:0; transition:opacity .3s;
+    }
+    .plato-tab.active::after { opacity:1; }
+
+    /* ── VISOR PRINCIPAL ── */
+    .modelo-layout {
+      max-width:1160px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+    }
+    .viewer-wrap {
+      position:relative; border-radius:22px; overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:0 40px 100px rgba(0,0,0,.6), 0 0 60px rgba(212,175,55,.06);
+      transition:box-shadow .5s, border-color .5s;
+      background:linear-gradient(135deg,rgba(11,26,42,.95),rgba(2,6,23,.95));
+    }
     .viewer-wrap:hover { box-shadow:0 50px 120px rgba(0,0,0,.7), 0 0 80px rgba(212,175,55,.12); }
     model-viewer { width:100%; height:440px; --poster-color:transparent; background:transparent; }
-    .ar-btn { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); display:inline-flex; align-items:center; gap:8px; padding:11px 24px; border-radius:50px; border:none; cursor:none; background:linear-gradient(135deg,var(--gold),#b8922a); color:var(--bg); font-family:'Syne',sans-serif; font-weight:700; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; box-shadow:0 8px 24px rgba(212,175,55,.35); transition:transform .3s var(--ease), box-shadow .3s; white-space:nowrap; }
+    .ar-btn {
+      position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
+      display:inline-flex; align-items:center; gap:8px; padding:11px 24px;
+      border-radius:50px; border:none; cursor:none;
+      background:linear-gradient(135deg,var(--gold),#b8922a); color:var(--bg);
+      font-family:'Syne',sans-serif; font-weight:700; font-size:12.5px;
+      letter-spacing:.08em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(212,175,55,.35);
+      transition:transform .3s var(--ease), box-shadow .3s;
+      white-space:nowrap; text-decoration:none;
+    }
     .ar-btn:hover { transform:translateX(-50%) translateY(-3px); box-shadow:0 14px 32px rgba(212,175,55,.5); }
-    .viewer-badge { position:absolute; top:-12px; right:20px; background:var(--green); color:#fff; font-family:'Syne',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; padding:4px 14px; border-radius:20px; box-shadow:0 4px 16px var(--green-glow); }
-    .viewer-hint { position:absolute; top:14px; left:14px; display:flex; align-items:center; gap:7px; background:rgba(2,6,23,.75); backdrop-filter:blur(8px); border:1px solid var(--border); border-radius:20px; padding:6px 13px; font-size:11px; color:var(--muted); pointer-events:none; }
+    .viewer-badge {
+      position:absolute; top:-12px; right:20px;
+      background:var(--green); color:#fff;
+      font-family:'Syne',sans-serif; font-size:10.5px; font-weight:700;
+      letter-spacing:.15em; text-transform:uppercase;
+      padding:4px 14px; border-radius:20px;
+      box-shadow:0 4px 16px var(--green-glow);
+      transition:background .4s, content .4s;
+    }
+    .viewer-hint {
+      position:absolute; top:14px; left:14px;
+      display:flex; align-items:center; gap:7px;
+      background:rgba(2,6,23,.75); backdrop-filter:blur(8px);
+      border:1px solid var(--border); border-radius:20px;
+      padding:6px 13px; font-size:11px; color:var(--muted); pointer-events:none;
+    }
     .hint-dot { width:6px;height:6px;border-radius:50%;background:var(--green);animation:badgePulse 2s ease-in-out infinite; }
     @keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.6)} 50%{box-shadow:0 0 0 5px rgba(16,185,129,0)} }
+
+    /* Transición del visor al cambiar plato */
+    .viewer-wrap { transition:box-shadow .5s, border-color .5s, opacity .35s; }
+    .viewer-wrap.switching { opacity:0; }
+
+    /* ── INFO DEL PLATO (lado derecho) ── */
+    .plato-info { transition:opacity .35s, transform .35s var(--ease); }
+    .plato-info.switching { opacity:0; transform:translateX(12px); }
+
     .info-bullets { display:flex; flex-direction:column; gap:10px; margin-top:24px; }
-    .info-bullet { display:flex; align-items:flex-start; gap:12px; padding:13px 16px; border-radius:14px; background:var(--gold-dim); border:1px solid transparent; transition:border-color .3s, background .3s, transform .35s var(--ease); }
+    .info-bullet {
+      display:flex; align-items:flex-start; gap:12px; padding:13px 16px;
+      border-radius:14px; background:var(--gold-dim); border:1px solid transparent;
+      transition:border-color .3s, background .3s, transform .35s var(--ease);
+    }
     .info-bullet:hover { border-color:var(--border); background:rgba(212,175,55,.18); transform:translateX(5px); }
     .bullet-icon { font-size:1.25rem; flex-shrink:0; margin-top:1px; }
     .bullet-title { font-family:'Syne',sans-serif; font-size:.85rem; font-weight:600; color:var(--gold-pale); }
     .bullet-desc { font-size:.78rem; color:var(--muted); margin-top:3px; line-height:1.5; }
     .modelo-btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
+
+    /* Número de plato grande (decorativo) */
+    .plato-number-deco {
+      font-family:'Syne',sans-serif; font-weight:800;
+      font-size:clamp(3.5rem,8vw,6rem);
+      line-height:1; letter-spacing:-.04em;
+      background:linear-gradient(135deg, rgba(212,175,55,.22), rgba(212,175,55,.06));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      margin-bottom:-10px; display:block;
+    }
+
+    /* Separador de platos */
+    .plato-divider {
+      display:flex; align-items:center; gap:16px; margin:14px 0 18px;
+    }
+    .plato-divider-line { flex:1; height:1px; background:var(--border); }
+    .plato-divider-gem { color:var(--gold); font-size:.65rem; opacity:.7; }
 
     /* ══════════════════════════════════════
        CÓMO FUNCIONA
@@ -156,9 +284,11 @@
     .step-icon { font-size:1.7rem; margin-bottom:12px; }
 
     /* ══════════════════════════════════════
-       BENEFICIOS (cards 2x2)
+       BENEFICIOS
     ══════════════════════════════════════ */
-    #beneficios { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,185,129,.06) 0%, transparent 70%), var(--bg-mid); }
+    #beneficios {
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,185,129,.06) 0%, transparent 70%), var(--bg-mid);
+    }
     .benefit-grid { max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
     .benefit-card { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:26px; transition:transform .4s var(--ease), border-color .3s, box-shadow .4s; cursor:none; }
     .benefit-card:hover { transform:translateY(-6px); border-color:rgba(212,175,55,.38); box-shadow:0 22px 55px rgba(0,0,0,.45); }
@@ -225,6 +355,7 @@
       .benefit-grid { grid-template-columns:1fr; }
       .footer-grid { grid-template-columns:1fr 1fr; }
       nav .nav-links a:not(.nav-cta):not(:nth-last-child(-n+2)) { display:none; }
+      .plato-tab { min-width:140px; padding:14px 18px 12px; }
     }
     @media (max-width:600px) {
       section { padding:70px 5%; }
@@ -232,6 +363,9 @@
       .footer-bottom { flex-direction:column; text-align:center; }
       body { cursor:auto; }
       #cur,#ring { display:none; }
+      .plato-tabs { gap:8px; }
+      .plato-tab { min-width:100px; padding:12px 12px 10px; }
+      .plato-tab-name { font-size:.72rem; }
     }
   </style>
 </head>
@@ -271,53 +405,95 @@
   <h2 class="hero-title">Tu menú, en otra dimensión</h2>
   <p class="hero-subtitle">Mostrá tus platos en 3D y realidad aumentada antes de que el cliente los pida. Una experiencia que vende.</p>
   <div class="hero-buttons">
-    <a href="#modelo" class="btn btn-gold">🍔 Ver plato en 3D</a>
+    <a href="#menu-digital" class="btn btn-gold">🍔 Ver menú 3D</a>
     <a href="#como" class="btn btn-outline">▶ Cómo funciona</a>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
 </section>
 
-<!-- MODELO 3D -->
-<section id="modelo">
+
+<!-- ══════════════════════════════════════
+     MENÚ DIGITAL INTERACTIVO
+══════════════════════════════════════ -->
+<section id="menu-digital">
   <div class="gold-line"></div>
-  <div class="modelo-layout">
-    <div class="reveal-l">
-      <div class="viewer-wrap">
-        <div class="viewer-badge">AR Ready</div>
-        <div class="viewer-hint"><div class="hint-dot"></div>Arrastrá para rotar</div>
-        <model-viewer
-          src="modelos/burga.glb"
-          ios-src="modelos/burga.usdz"
-          ar ar-modes="scene-viewer quick-look webxr"
-          camera-controls auto-rotate auto-rotate-delay="1000"
-          rotation-per-second="20deg"
-          exposure="1.3" shadow-intensity="1.2" shadow-softness="1"
-          interaction-prompt="auto"
-          style="width:100%;height:440px;">
-          <button slot="ar-button" class="ar-btn">📱 Ver en tu espacio</button>
-        </model-viewer>
-      </div>
+
+  <!-- Encabezado -->
+  <div class="menu-header reveal">
+    <div class="menu-badge">
+      <span class="menu-badge-dot"></span>
+      Menú Patagonia 360
     </div>
-    <div class="reveal-r">
-      <div class="section-tag">Visor interactivo</div>
-      <h2 class="section-title">El plato, antes<br><span style="color:var(--gold)">de pedirlo</span></h2>
-      <p class="section-subtitle">El cliente ve exactamente lo que va a recibir. Tamaño real, textura y detalle. Más confianza, más ventas.</p>
-      <div class="info-bullets">
+    <h2 class="section-title" style="font-size:clamp(2rem,4.5vw,3.2rem);">Menú Digital<br><span style="color:var(--gold)">Interactivo</span></h2>
+    <p class="section-subtitle" style="margin:12px auto 0; max-width:480px;">
+      Seleccioná un plato para explorar las funcionalidades del servicio
+    </p>
+  </div>
+
+  <!-- TABS DE SELECCIÓN -->
+  <div class="plato-tabs reveal" id="platoTabs">
+    <div class="plato-tab active" data-plato="0" onclick="selectPlato(0)">
+      <span class="plato-tab-num">Plato 01</span>
+      <span class="plato-tab-emoji">🍔</span>
+      <span class="plato-tab-name">Menú 3D<br>Interactivo</span>
+      <span class="plato-tab-pill">Visualización</span>
+    </div>
+    <div class="plato-tab" data-plato="1" onclick="selectPlato(1)">
+      <span class="plato-tab-num">Plato 02</span>
+      <span class="plato-tab-emoji">🥩</span>
+      <span class="plato-tab-name">Realidad<br>Aumentada</span>
+      <span class="plato-tab-pill">AR Experience</span>
+    </div>
+    <div class="plato-tab" data-plato="2" onclick="selectPlato(2)">
+      <span class="plato-tab-num">Plato 03</span>
+      <span class="plato-tab-emoji">🍰</span>
+      <span class="plato-tab-name">Catálogo<br>Digital Premium</span>
+      <span class="plato-tab-pill">Integración</span>
+    </div>
+  </div>
+
+  <!-- VISOR + INFO -->
+  <div class="modelo-layout">
+
+    <!-- VISOR 3D -->
+    <div class="viewer-wrap reveal-l" id="viewerWrap">
+      <div class="viewer-badge" id="viewerBadge">AR Ready</div>
+      <div class="viewer-hint"><div class="hint-dot"></div>Arrastrá para rotar</div>
+      <model-viewer
+        id="mainViewer"
+        src="modelos/burga.glb"
+        ios-src="modelos/burga.usdz"
+        ar ar-modes="scene-viewer quick-look webxr"
+        camera-controls auto-rotate auto-rotate-delay="1000"
+        rotation-per-second="20deg"
+        exposure="1.3" shadow-intensity="1.2" shadow-softness="1"
+        interaction-prompt="auto"
+        style="width:100%;height:440px;">
+        <a id="arBtn" slot="ar-button" class="ar-btn" href="#ar">📱 Ver en tu espacio</a>
+      </model-viewer>
+    </div>
+
+    <!-- INFO DEL PLATO -->
+    <div class="plato-info reveal-r" id="platoInfo">
+      <span class="plato-number-deco" id="platoDeco">01</span>
+      <div class="section-tag" id="platoTag">Visualización 3D</div>
+      <h2 class="section-title" id="platoTitle">El plato, antes<br><span style="color:var(--gold)">de pedirlo</span></h2>
+      <div class="plato-divider"><div class="plato-divider-line"></div><span class="plato-divider-gem">◆</span><div class="plato-divider-line"></div></div>
+      <p class="section-subtitle" id="platoDesc">
+        Visualización tridimensional de platos antes de realizar el pedido. El cliente ve exactamente lo que va a recibir: tamaño real, textura y detalle. Más confianza, más ventas.
+      </p>
+      <div class="info-bullets" id="platoBullets">
         <div class="info-bullet">
-          <span class="bullet-icon">📈</span>
-          <div><div class="bullet-title">Más ventas garantizadas</div><div class="bullet-desc">El cliente elige más rápido y con seguridad. Mayor tasa de decisión de compra.</div></div>
+          <span class="bullet-icon">🔍</span>
+          <div><div class="bullet-title">Vista 360°</div><div class="bullet-desc">Rotación completa del plato desde cualquier ángulo, con zoom y detalle en tiempo real.</div></div>
         </div>
         <div class="info-bullet">
-          <span class="bullet-icon">✨</span>
-          <div><div class="bullet-title">Experiencia premium</div><div class="bullet-desc">Diferenciación inmediata frente a la competencia. Tu restaurante en otro nivel.</div></div>
-        </div>
-        <div class="info-bullet">
-          <span class="bullet-icon">📲</span>
-          <div><div class="bullet-title">Menú siempre actualizado</div><div class="bullet-desc">Cambios sin costos de impresión. Acceso por QR desde el celular del cliente.</div></div>
+          <span class="bullet-icon">📐</span>
+          <div><div class="bullet-title">Escala real</div><div class="bullet-desc">El modelo respeta las proporciones y el tamaño real del plato para una expectativa precisa.</div></div>
         </div>
         <div class="info-bullet">
           <span class="bullet-icon">⚡</span>
-          <div><div class="bullet-title">Implementación en 7 días</div><div class="bullet-desc">Digitalizamos tus platos y los dejamos listos para usar en tu menú digital.</div></div>
+          <div><div class="bullet-title">Sin descarga</div><div class="bullet-desc">El cliente accede directo desde el QR del menú, sin instalar ninguna aplicación adicional.</div></div>
         </div>
       </div>
       <div class="modelo-btns">
@@ -325,8 +501,10 @@
         <a href="#como" class="btn btn-outline">Ver proceso</a>
       </div>
     </div>
+
   </div>
 </section>
+
 
 <!-- CÓMO FUNCIONA -->
 <section id="como">
@@ -369,28 +547,28 @@
   <div class="benefit-grid">
     <div class="benefit-card reveal d1">
       <span class="benefit-icon">📈</span>
-      <h3>Aumenta las ventas</h3>
+      <h3>Mayor conversión</h3>
       <p>Ver el plato en 3D reduce la indecisión del cliente. El proceso de compra se acelera y el ticket promedio sube.</p>
     </div>
     <div class="benefit-card reveal d2">
-      <span class="benefit-icon">🏆</span>
-      <h3>Diferenciación total</h3>
-      <p>Pocas propuestas gastronómicas en el mundo usan esta tecnología. Ser de los primeros es una ventaja enorme.</p>
+      <span class="benefit-icon">✨</span>
+      <h3>Experiencia innovadora</h3>
+      <p>Una interacción que sorprende desde el primer momento. El menú deja de ser una lista y se convierte en vivencia.</p>
     </div>
     <div class="benefit-card reveal d3">
-      <span class="benefit-icon">🔄</span>
-      <h3>Menú sin impresión</h3>
-      <p>Actualizá precios, agregá platos o cambiá estacionalidad sin costos adicionales de diseño o impresión.</p>
+      <span class="benefit-icon">🏆</span>
+      <h3>Diferenciación tecnológica</h3>
+      <p>Pocas propuestas en el mundo usan esta tecnología. Ser de los primeros es una ventaja competitiva enorme.</p>
     </div>
     <div class="benefit-card reveal d4">
-      <span class="benefit-icon">🌟</span>
-      <h3>Mayor engagement</h3>
-      <p>Los clientes comparten la experiencia en redes. Tu restaurante se convierte en contenido orgánico.</p>
+      <span class="benefit-icon">🛡️</span>
+      <h3>Menor incertidumbre</h3>
+      <p>El cliente sabe exactamente lo que va a recibir. Menos devoluciones, más satisfacción y mayor fidelización.</p>
     </div>
   </div>
 </section>
 
-<!-- TAMBIÉN PODÉS EXPLORAR -->
+<!-- EXPLORAR -->
 <section class="explore-section">
   <div class="gold-line"></div>
   <div class="section-header center reveal">
@@ -427,15 +605,15 @@
   <div class="gold-line"></div>
   <div class="cta-inner reveal">
     <div class="section-tag" style="justify-content:center">Siguiente paso</div>
-    <h2 class="cta-title">Transformamos tu carta<br>en una experiencia</h2>
-    <p class="cta-sub">Implementamos esta tecnología en tu restaurante en menos de 7 días. Sin complicaciones, con impacto inmediato.</p>
+    <h2 class="cta-title">¿Querés implementar esta<br>experiencia en tu restaurante?</h2>
+    <p class="cta-sub">Digitalizamos tus platos y los dejamos listos en menos de 7 días. Sin complicaciones, con impacto inmediato.</p>
     <div class="cta-divider">
       <div class="cta-divider-line"></div>
       <div class="cta-divider-star">◆</div>
       <div class="cta-divider-line"></div>
     </div>
     <div class="cta-btns">
-      <a href="https://wa.me/5492944931548" class="btn btn-primary" style="font-size:.95rem;padding:14px 32px">📲 Trabajemos juntos</a>
+      <a href="https://wa.me/5492944931548" class="btn btn-primary" style="font-size:.95rem;padding:14px 32px">📲 Solicitar una demostración</a>
       <a href="estudio.html" class="btn btn-gold" style="font-size:.95rem;padding:14px 32px">💻 Ver estudio</a>
     </div>
   </div>
@@ -488,27 +666,149 @@
   </div>
 </footer>
 
+
 <script>
+  /* ── CURSOR ── */
   const cur = document.getElementById('cur');
   const ring = document.getElementById('ring');
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
   (function tick(){ rx+=(mx-rx)*.13; ry+=(my-ry)*.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
 
+  /* ── NAV SCROLL ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', ()=>{ nav.classList.toggle('scrolled', window.scrollY>50); }, {passive:true});
 
+  /* ── REVEAL ── */
   const allReveal = document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('active'), i*75); obs.unobserve(e.target); } });
   },{threshold:0.1});
   allReveal.forEach(el=>obs.observe(el));
 
+  /* ── PARALLAX ORBS ── */
   window.addEventListener('scroll',()=>{
     const y=window.scrollY;
     document.querySelector('.orb-1').style.transform=`translate(0,${y*.1}px)`;
     document.querySelector('.orb-2').style.transform=`translate(0,${-y*.07}px)`;
   },{passive:true});
+
+  /* ══════════════════════════════════════
+     MENÚ DIGITAL INTERACTIVO — DATOS
+  ══════════════════════════════════════ */
+  const platos = [
+    {
+      num: '01',
+      tag: 'Visualización 3D',
+      emoji: '🍔',
+      titleHtml: 'El plato, antes<br><span style="color:var(--gold)">de pedirlo</span>',
+      desc: 'Visualización tridimensional de platos antes de realizar el pedido. El cliente ve exactamente lo que va a recibir: tamaño real, textura y detalle. Más confianza, más ventas.',
+      badge: 'AR Ready',
+      model: 'modelos/burga.glb',
+      iosSrc: 'modelos/burga.usdz',
+      arLabel: '📱 Ver en tu espacio',
+      bullets: [
+        { icon:'🔍', title:'Vista 360°', desc:'Rotación completa del plato desde cualquier ángulo, con zoom y detalle en tiempo real.' },
+        { icon:'📐', title:'Escala real', desc:'El modelo respeta las proporciones y el tamaño real del plato para una expectativa precisa.' },
+        { icon:'⚡', title:'Sin descarga', desc:'El cliente accede directo desde el QR del menú, sin instalar ninguna aplicación adicional.' },
+      ]
+    },
+    {
+      num: '02',
+      tag: 'Realidad Aumentada',
+      emoji: '🥩',
+      titleHtml: 'El plato,<br><span style="color:var(--gold)">sobre tu mesa</span>',
+      desc: 'Los clientes pueden visualizar los platos sobre su propia mesa utilizando realidad aumentada. Una experiencia inmersiva que transforma la decisión de compra en un momento memorable.',
+      badge: 'AR Live',
+      model: 'modelos/plato2.glb',
+      iosSrc: 'modelos/plato2.usdz',
+      arLabel: '📱 Proyectar en tu mesa',
+      bullets: [
+        { icon:'🌍', title:'AR sin app', desc:'Realidad aumentada nativa desde el navegador del celular. Sin descargas, sin fricciones.' },
+        { icon:'📏', title:'Tamaño a escala', desc:'El plato aparece en escala real sobre la superficie del cliente para una percepción exacta.' },
+        { icon:'🤩', title:'Efecto wow garantizado', desc:'Una experiencia que los clientes comparten en redes, convirtiendo tu menú en contenido viral.' },
+      ]
+    },
+    {
+      num: '03',
+      tag: 'Catálogo Digital Premium',
+      emoji: '🍰',
+      titleHtml: 'Un menú,<br><span style="color:var(--gold)">todo integrado</span>',
+      desc: 'Integración de menús digitales, QR, imágenes, modelos 3D y realidad aumentada en un solo ecosistema premium. Actualizá precios y platos en tiempo real, sin costos de impresión.',
+      badge: 'Full Digital',
+      model: 'modelos/plato3.glb',
+      iosSrc: 'modelos/plato3.usdz',
+      arLabel: '📱 Ver en realidad aumentada',
+      bullets: [
+        { icon:'🔗', title:'Todo en uno', desc:'QR, 3D, AR, imágenes y descripción de cada plato integrados en una sola experiencia digital.' },
+        { icon:'🔄', title:'Actualizaciones en tiempo real', desc:'Cambiá precios, platos y disponibilidad sin costos de diseño ni impresión.' },
+        { icon:'📊', title:'Métricas de uso', desc:'Conocé qué platos exploran más tus clientes para optimizar tu oferta y aumentar ventas.' },
+      ]
+    }
+  ];
+
+  let currentPlato = 0;
+  let switching = false;
+
+  function selectPlato(index) {
+    if (switching || index === currentPlato) return;
+    switching = true;
+
+    const viewerWrap = document.getElementById('viewerWrap');
+    const platoInfo  = document.getElementById('platoInfo');
+
+    /* Fade out */
+    viewerWrap.classList.add('switching');
+    platoInfo.classList.add('switching');
+
+    setTimeout(() => {
+      applyPlato(index);
+
+      /* Fade in */
+      viewerWrap.classList.remove('switching');
+      platoInfo.classList.remove('switching');
+      switching = false;
+    }, 360);
+
+    /* Actualizar tabs */
+    document.querySelectorAll('.plato-tab').forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+    });
+
+    currentPlato = index;
+  }
+
+  function applyPlato(index) {
+    const p = platos[index];
+    const viewer = document.getElementById('mainViewer');
+
+    /* Visor */
+    viewer.setAttribute('src', p.model);
+    viewer.setAttribute('ios-src', p.iosSrc);
+    document.getElementById('viewerBadge').textContent = p.badge;
+
+    /* Botón AR */
+    const arBtn = document.getElementById('arBtn');
+    arBtn.textContent = p.arLabel;
+
+    /* Info */
+    document.getElementById('platoDeco').textContent   = p.num;
+    document.getElementById('platoTag').textContent    = p.tag;
+    document.getElementById('platoTitle').innerHTML    = p.titleHtml;
+    document.getElementById('platoDesc').textContent   = p.desc;
+
+    /* Bullets */
+    const bulletsEl = document.getElementById('platoBullets');
+    bulletsEl.innerHTML = p.bullets.map(b => `
+      <div class="info-bullet">
+        <span class="bullet-icon">${b.icon}</span>
+        <div>
+          <div class="bullet-title">${b.title}</div>
+          <div class="bullet-desc">${b.desc}</div>
+        </div>
+      </div>
+    `).join('');
+  }
 </script>
 </body>
 </html>
